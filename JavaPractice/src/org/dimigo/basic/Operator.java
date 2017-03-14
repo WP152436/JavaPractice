@@ -25,7 +25,6 @@ public class Operator {
 		int money = 1700000;
 		int employee = 3;
 		int store = 1500;
-		long total = 1700000*12*3*1500l;
 		System.out.println("<<디미베네 연간 인건비>>");
 		System.out.println("월 평균 급여 : " + String.format("%,d", money) + "원");
 		System.out.println("점포 내 직원 수 : " + employee + "명");
