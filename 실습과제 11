@@ -1,0 +1,179 @@
+/**
+ * 
+ */
+package org.dimigo.inheritance;
+
+/**
+ * <pre>
+ * org.dimigo.inheritance
+ *	|_ IPhone
+ *
+ * 1. 개요 :
+ * 2. 작성일 : 2017. 5. 15.
+ * </pre>
+ *
+ * @author 		:playblock
+ * @version 	: 1.0
+ */
+public class IPhone extends SmartPhone {
+		public IPhone(){
+			
+		}
+		public IPhone(String model, String company, int price){
+			super(model, company, price);
+		}
+		public void pay(){
+			System.out.println("애플 페이로 결제합니다.");
+		}
+		public void useAirDrop(){
+			System.out.println("AirDrop 기능을 사용합니다.");
+			
+		}
+		
+
+	}
+
+
+
+/**
+ * 
+ */
+package org.dimigo.inheritance;
+
+/**
+ * <pre>
+ * org.dimigo.inheritance
+ *	|_ SmartPhone
+ *
+ * 1. 개요 :
+ * 2. 작성일 : 2017. 5. 15.
+ * </pre>
+ *
+ * @author 		:playblock
+ * @version 	: 1.0
+ */
+public class SmartPhone {
+	
+	private String model;
+	private String company;
+	private int price;
+	
+	public SmartPhone(){
+		
+	}
+	public SmartPhone(String model, String company, int price){
+		this.model =model;
+		this.company = company;
+		this.price = price;
+		
+	}
+	
+	public void turnOn(){
+		System.out.println(model + "의 전원을 켭니다.");
+		
+	}
+	public void turnOff(){
+		System.out.println(model + "의 전원을 끕니다.");
+	}
+	public void pay(){
+		//System.out.println(company + "로 결제합니다.");			
+	}
+	public void useSpecialFunction(SmartPhone phone){
+		if(phone instanceof IPhone )
+			((IPhone) phone).useAirDrop();
+		else if(phone instanceof Galaxy){
+			((Galaxy) phone).useWirelessCarging();
+		}
+		
+	}
+	public String toString(){
+		
+		return "모델명: " + model + ",제조사: " + company + ",가격: " + String.format("%,d", price) + "원";
+	}
+
+}
+
+/**
+ * 
+ */
+package org.dimigo.inheritance;
+
+/**
+ * <pre>
+ * org.dimigo.inheritance
+ *	|_ SmartPhoneTest
+ *
+ * 1. 개요 :
+ * 2. 작성일 : 2017. 5. 15.
+ * </pre>
+ *
+ * @author 		:playblock
+ * @version 	: 1.0
+ */
+public class SmartPhoneTest {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		SmartPhone[] sp = {
+				new IPhone("iPhone 7", "애플", 900000),
+				new Galaxy("갤럭시 S8", "삼성", 800000)
+		};
+		
+		for(int i =0; i<sp.length; i++){
+			System.out.println(sp[i].toString());
+			sp[i].turnOn();
+			if(sp[i] instanceof IPhone){
+				sp[i].pay();
+				sp[i].useSpecialFunction(sp[i]);
+			}
+			else if(sp[i] instanceof Galaxy){
+				sp[i].pay();
+				sp[i].useSpecialFunction(sp[i]);
+			}
+			sp[i].turnOff();
+			System.out.println();
+		}
+		
+		
+	}
+
+}
+
+/**
+ * 
+ */
+package org.dimigo.inheritance;
+
+
+
+/**
+ * <pre>
+ * org.dimigo.inheritance
+ *	|_ Galaxy
+ *
+ * 1. 개요 :
+ * 2. 작성일 : 2017. 5. 15.
+ * </pre>
+ *
+ * @author 		:playblock
+ * @version 	: 1.0
+ */
+public class Galaxy extends SmartPhone {
+	
+	public Galaxy(){
+		
+	}
+	public Galaxy(String model, String company, int price){
+		super(model, company, price);
+	}
+	public void pay(){
+		System.out.println("삼성 페이로 결제합니다.");
+		
+	}
+	public void useWirelessCarging(){
+		System.out.println("무선 충전 기능을 이용합니다.");
+	}
+	
+}
